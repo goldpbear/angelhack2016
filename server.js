@@ -24,8 +24,14 @@ var data = new Data(dataOptions);
 var reportsRouter = express.Router();
 var overviewRouter = express.Router();
 
+app.use(express.static(__dirname + '/public'));
+
 app.use('/reports', reportsRouter);
 app.use('/overview', overviewRouter);
 
 // TODO: set up routes for /reports and /overview
+
+reportsRouter.get('/', function(req, res) {
+  res.sendfile('reports.html');
+});
 
