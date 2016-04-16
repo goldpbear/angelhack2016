@@ -16,3 +16,7 @@ app.use('/overview', overviewRouter);
 
 // TODO: set up routes for /reports and /overview
 
+reportsRouter.get('/', function(req, res) {
+  res.sendfile('reports.html');
+});
+
