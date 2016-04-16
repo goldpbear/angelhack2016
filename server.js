@@ -12,11 +12,20 @@ app.listen(PORT);
 var Data = require('./data');
 
 var dataOptions = {
-  url:        process.env.DATA_URL || 'localhost',
-  port:       process.env.DATA_PORT || 5432
+  dialect:    process.env.DATA_DIALECT    || 'postgres',
+  host:       process.env.DATA_HOST       || 'localhost',
+  port:       process.env.DATA_PORT       || 5432,
+  database:   process.env.DATA_DATABASE   || 'angel',
+  username:   process.env.DATA_USERNAME   || 'user',
+  password:   process.env.DATA_PASSWORD   || 'password',
+  sync:       process.env.DATA_SYNC       || false
 };
 
 var data = new Data(dataOptions);
+
+data.ready(function (models) {
+  //models.User.findAll()
+});
 
 
 // routes
