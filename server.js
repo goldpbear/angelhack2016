@@ -66,12 +66,11 @@ apiRouter.post('/reports', function (req, res) {
 
     var body = req.body;
 
-    // do something with
-    // body.coordinates
-
     models.Crime.create({
       type:         body.type,
-      description:  body.description
+      description:  body.description,
+      latitude:     body.latitude,
+      longitude:    body.longitude
     }).then(function (result) {
       res.send(JSON.stringify((result)));
     }).catch(function (err) {
