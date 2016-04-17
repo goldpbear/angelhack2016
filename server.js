@@ -12,6 +12,7 @@ app.listen(PORT);
 var Data = require('./data');
 
 var dataOptions = {
+  url:        process.env.DATABASE_URL    || null,
   dialect:    process.env.DATA_DIALECT    || 'postgres',
   host:       process.env.DATA_HOST       || 'localhost',
   port:       process.env.DATA_PORT       || 5432,
@@ -24,7 +25,7 @@ var dataOptions = {
 var data = new Data(dataOptions);
 
 data.ready(function (models) {
-  //models.User.findAll()
+  models.User.findAll()
 });
 
 
