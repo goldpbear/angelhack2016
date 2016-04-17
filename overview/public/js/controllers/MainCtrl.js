@@ -4,26 +4,12 @@ angular.module('angelhack')
 	   .controller('MainController', function($rootScope, $scope, geolocationService, $http) {
 	   		var map,
 	   			fetchedData,
-	   			dummyData = [
-	   				{
-	   					"createdAt": "2016-04-17T01:28:53.127Z",
-	   					"description": "crime!",
-	   					"id": 1,
-	   					"type": 2,
-	   					"updatedAt": "2016-04-17T01:28:53.127Z",
-	   					"longitude": -122.35117989999998,
-	   					"latitude": 47.649616099999996,
-	   				},
-	   				{
-	   					"createdAt": "2016-04-17T01:55:53.127Z",
-	   					"description": "even more crime!",
-	   					"id": 2,
-	   					"type": 3,
-	   					"updatedAt": "2016-04-17T01:55:53.127Z",
-	   					"longitude": -122.35117980000001,
-	   					"latitude": 47.65558063610035,
-	   				}
-	   			];
+	   			crimeTypes = {
+	   				0: "No response",
+	   				1: "Assault",
+	   				2: "Robbery",
+	   				3: "Vandalism"
+	   			};
 
 	   		geolocationService.setCoords();
 	   		
@@ -69,13 +55,15 @@ angular.module('angelhack')
 							            esri.geometry.geographicToWebMercator(pt),
 							            new esri.symbol.SimpleMarkerSymbol(),
 							            { "description": data.description,
-							              "createdAt": data.createdAt } 
+							              "createdAt": data.createdAt,
+							              "type": data.type } 
 							        ));
 							  	});
 
 							  	map.graphics.on("mouse-over", function(evt) {
 							  		var graphicAttributes = evt.graphic.attributes;
 							  		var content = "<b>Description of this crime: </b><i>" + graphicAttributes.description + "</i><br>" +
+							  					  "<b>Type of crime: </b><i>" + crimeTypes[graphicAttributes.type] + "</i><br>" +
 							  					  "<b>Time of crime: </b><i>" + new Date(graphicAttributes.createdAt) + "</i>";
 							  		map.infoWindow.setTitle("Crime report");
   									map.infoWindow.setContent(content);
