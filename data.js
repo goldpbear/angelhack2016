@@ -23,7 +23,9 @@ module.exports = function Data(options) {
   var Crime = db.define('crime', {
     id:             { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
     description:    Sequelize.STRING,
-    type:           Sequelize.INTEGER
+    type:           Sequelize.INTEGER,
+    latitude:       Sequelize.DOUBLE,
+    longitude:      Sequelize.DOUBLE
   });
 
   var Response = db.define('response', {
