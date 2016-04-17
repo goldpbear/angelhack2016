@@ -11,7 +11,8 @@ angular.module('angelhack')
 	   					"id": 1,
 	   					"type": 2,
 	   					"updatedAt": "2016-04-17T01:28:53.127Z",
-	   					"coordinates": [-122.35117989999998, 47.649616099999996]
+	   					"longitude": -122.35117989999998,
+	   					"latitude": 47.649616099999996,
 	   				},
 	   				{
 	   					"createdAt": "2016-04-17T01:55:53.127Z",
@@ -19,7 +20,8 @@ angular.module('angelhack')
 	   					"id": 2,
 	   					"type": 3,
 	   					"updatedAt": "2016-04-17T01:55:53.127Z",
-	   					"coordinates": [-122.35117980000001, 47.65558063610035]
+	   					"longitude": -122.35117980000001,
+	   					"latitude": 47.65558063610035,
 	   				}
 	   			];
 
@@ -66,7 +68,7 @@ angular.module('angelhack')
 						  	map.on("load", function() {
 						  		// add points from lat/long returned from api
 							  	dummyData.forEach(function(data) {
-							  		var pt = new esri.geometry.Point(data.coordinates[0], data.coordinates[1], new esri.SpatialReference({ 'wkid': 4326 })); 
+							  		var pt = new esri.geometry.Point(data.longitude, data.latitude, new esri.SpatialReference({ 'wkid': 4326 })); 
 							  		console.log(pt);
 							  		map.graphics.add(new esri.Graphic(  
 							            esri.geometry.geographicToWebMercator(pt),

@@ -55,7 +55,9 @@ angular.module('angelhack')
 	   		var data = {
 	   			"type": 0,
 	   			"description": "no response",
-	   			"coordinates": [$rootScope.longitude, $rootScope.latitude]
+	   			"latitude": $rootScope.latitude,
+	   			"longtiude": $rootScope.longitude
+	   			//"coordinates": [$rootScope.longitude, $rootScope.latitude]
 	   		}
 
 	   		$scope.ok = function (submission) {
