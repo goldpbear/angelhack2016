@@ -6,7 +6,7 @@ module.exports = function Data(options) {
   var db;
 
   if (options.url) {
-    db = new Sequelize(options.url);
+    db = new Sequelize(options.url, { dialectOptions: { ssl: true } });
   } else {
     db = new Sequelize(options.database, options.username, options.password, {
       host: options.host,
