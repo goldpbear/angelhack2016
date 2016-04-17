@@ -1,7 +1,8 @@
 // public/js/controllers/MainCtrl.js
 
 angular.module('angelhack')
-	   .controller('MainController', function($scope, $uibModal) {
+	   .controller('MainController', function($scope, $uibModal, geolocationService) {
+	   		geolocationService.setCoords();
 
 		   	var map;
 			require(["esri/map"], function(Map) {
@@ -28,16 +29,12 @@ angular.module('angelhack')
 			    });
 			};
 		})
-	   	.controller('reportModalController', function($scope, $uibModalInstance, $http) {
-
-	   		var dummyData = {
-	   			"type": 4,
-	   			"description": "Stolen laptop",
-	   			"coordinates": [23.4, -23.4]
-	   		};
+	   	.controller('reportModalController', function($scope, $uibModalInstance, $http, geolocationService) {
+	   		var temp = geolocationService.getCoords();
+	   		console.log(temp);
 
 	   		$scope.ok = function () {
-	   			console.log("click ok");
+	   			console.log(dummyData);
 	   			$http({
 	   				method: "POST",
 	   				url: "https://gangel.herokuapp.com/api/reports",
