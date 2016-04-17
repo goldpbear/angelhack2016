@@ -79,3 +79,36 @@ apiRouter.post('/reports', function (req, res) {
     });
   });
 });
+
+apiRouter.get('/reports/:id/responses', function (req, res) {
+  $(function (models) {
+    res.setHeader('Content-Type', 'application/json');
+
+    models.Crime.findById(req.params.id).then(function (crime) {
+      return crime.getResponses();
+    }).then(function (responses) {
+      res.send(JSON.stringify(responses));
+    }).catch(function (err) {
+      console.log(err);
+      res.send(JSON.stringify({ error: err }));
+    });
+  })
+});
+
+apiRouter.post('/reports/:id/responses', function (req, res) {
+  $(function (models) {
+    res.setHeader('Content-Type', 'application/json');
+
+    var body = req.body;
+
+    models.Crime.findById(req.params.id).then(function (crime) {
+      return crime.createResponse({
+        code: body.code
+      });
+    }).then(function (response) {
+      res.send(JSON.stringify(response));
+    }).catch(function (err) {
+      res.send(JSON.stringify({ error: err }));
+    });
+  })
+});
