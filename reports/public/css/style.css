@@ -1,0 +1,57 @@
+
+.container{
+  text-align: center;
+  margin: auto;
+}
+
+
+fieldset {
+  border-style: solid;
+  border-color: #222240;
+}
+
+legend{
+  font-weight: bold;
+}
+
+input{
+  margin-top: 2rem;
+}
+
+.row{
+  text-align: center;
+}
+#usr-input{
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-style: solid;
+  border-color: rgb(98, 154, 239);
+  border-width: thin;
+}
+
+
+#submit{
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  background-color: #222240;
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px #888888;
+  color: white;
+  height: 40%;
+  text-align: center;
+  width: 30%;
+}
+
+#submit:hover {
+  background-color: #2B2B94;
+  box-shadow: 1px 1px 2px #888888;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  height: 40%;
+  width: 30%;
+}
+
+#report-button p{
+  padding-top: .4rem;
+}
