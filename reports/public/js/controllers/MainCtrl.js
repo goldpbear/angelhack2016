@@ -49,7 +49,7 @@ angular.module('angelhack')
 			    });
 			};
 		})
-	   	.controller('reportModalController', function($rootScope, $scope, $uibModalInstance, $http, geolocationService) {
+	   	.controller('reportModalController', function($rootScope, $scope, $uibModalInstance, $http, geolocationService, $window) {
 	   		$scope.submission = {};
 
 	   		var data = {
@@ -70,6 +70,7 @@ angular.module('angelhack')
 
 	   			}).then(function successCallback(response) {
 	   				console.log("success", response);
+	   				$window.location.href = "/overview";
 				  }, function errorCallback(response) {
 				  	console.log("error", response);
 				});
