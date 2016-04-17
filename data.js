@@ -21,13 +21,14 @@ module.exports = function Data(options) {
   });
 
   var Crime = db.define('crime', {
-    id:     { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-    name:     Sequelize.STRING
+    id:             { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+    description:    Sequelize.STRING,
+    type:           Sequelize.INTEGER
   });
 
   var Response = db.define('response', {
     id:     { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-    code:     Sequelize.INTEGER
+    code:   Sequelize.INTEGER
   });
 
   User.hasMany(Crime);
@@ -44,8 +45,8 @@ module.exports = function Data(options) {
   };
 
   this.ready = function (cb) {
-    if (options.sync && !inSync) {
-      db.sync().then(function () {
+    if ((options.sync || options.forceSync) && !inSync) {
+      db.sync({ force: options.forceSync }).then(function () {
         inSync = true;
         return models;
       }).then(cb);
