@@ -33,15 +33,21 @@ data.ready(function (models) {
 
 var reportsRouter = express.Router();
 var overviewRouter = express.Router();
+var apiRouter = express.Router();
 
 app.use(express.static(__dirname + '/public'));
 
 app.use('/reports', reportsRouter);
 app.use('/overview', overviewRouter);
+app.use('/api', apiRouter);
 
-// TODO: set up routes for /reports and /overview
+reportsRouter.use(express.static('reports/public'));
+overviewRouter.use(express.static('overview/public'));
 
-reportsRouter.get('/', function(req, res) {
-  res.sendfile('reports.html');
+apiRouter.get('/reports', function (req, res) {
+  // return reports
 });
 
+apiRouter.post('/reports', function (req, res) {
+  // create report
+});
