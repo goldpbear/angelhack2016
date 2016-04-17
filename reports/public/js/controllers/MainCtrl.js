@@ -1,7 +1,8 @@
 // public/js/controllers/MainCtrl.js
 
 angular.module('angelhack')
-	   .controller('MainController', function($scope, $uibModal) {
+	   .controller('MainController', function($scope, $uibModal, geolocationService) {
+	   		geolocationService.setCoords();
 
 		   	var map;
 			require(["esri/map"], function(Map) {
@@ -12,7 +13,6 @@ angular.module('angelhack')
 			  });
 			});
 
-	   		$scope.tagline = "It's working";
 	   		$scope.reportCrimeMsg = "Report a crime";
 
 	   		// controls for modal dialog
@@ -27,11 +27,29 @@ angular.module('angelhack')
 			        }
 			      }
 			    });
-
 			};
 		})
-	   	.controller('reportModalController', function($scope, $uibModalInstance) {
+	   	.controller('reportModalController', function($scope, $uibModalInstance, $http, geolocationService) {
+	   		var temp = geolocationService.getCoords();
+	   		console.log(temp);
+
 	   		$scope.ok = function () {
+	   			console.log(dummyData);
+	   			$http({
+	   				method: "POST",
+	   				url: "https://gangel.herokuapp.com/api/reports",
+	   				data: dummyData
+
+	   			}).then(function successCallback(response) {
+	   				console.log("success", response);
+				    // this callback will be called asynchronously
+				    // when the response is available
+				  }, function errorCallback(response) {
+				  	console.log("error", response);
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				});
+
 			    $uibModalInstance.close();
 			};
 
