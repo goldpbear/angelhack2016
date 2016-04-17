@@ -56,15 +56,14 @@ angular.module('angelhack')
 	   			"type": 0,
 	   			"description": "no response",
 	   			"latitude": $rootScope.latitude,
-	   			"longtiude": $rootScope.longitude
+	   			"longitude": $rootScope.longitude
 	   			//"coordinates": [$rootScope.longitude, $rootScope.latitude]
 	   		}
 
 	   		$scope.ok = function (submission) {
-	   			data.type = parseInt(submission.type);
+	   			data.type = parseInt(submission.type) || 0;
 	   			data.description = submission.description;
 
-	   			console.log(data);
 	   			$http({
 	   				method: "POST",
 	   				url: "/api/reports",
