@@ -5,12 +5,16 @@ angular.module('angelhack')
 	   		geolocationService.setCoords();
 
 		   	var map;
-			require(["esri/map"], function(Map) {
+			require(["esri/map"], function(Map, Point) {
 			  map = new Map("mapDiv", {
 			    center: [-56.049, 38.485],
-			    zoom: 3,
+			    zoom: 5,
 			    basemap: "streets"
 			  });
+			});
+
+			$scope.$on("coordsRetrieved", function(event, data) {
+				map.centerAndZoom(new esri.geometry.Point(data.longitude, data.latitude), 14);
 			});
 
 	   		$scope.reportCrimeMsg = "Report a crime";
