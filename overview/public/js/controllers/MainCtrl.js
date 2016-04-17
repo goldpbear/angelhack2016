@@ -62,12 +62,9 @@ angular.module('angelhack')
 							});
 
 						  	map.on("load", function() {
-						  		console.log(fetchedData);
 						  		// add points from lat/long returned from api
 							  	fetchedData.forEach(function(data) {
-							  		console.log("long", data.longitude);
 							  		var pt = new esri.geometry.Point(data.longitude, data.latitude); 
-							  		console.log(pt);
 							  		map.graphics.add(new esri.Graphic(  
 							            esri.geometry.geographicToWebMercator(pt),
 							            new esri.symbol.SimpleMarkerSymbol(),
