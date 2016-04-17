@@ -12,7 +12,6 @@ angular.module('angelhack')
 			  });
 			});
 
-	   		$scope.tagline = "It's working";
 	   		$scope.reportCrimeMsg = "Report a crime";
 
 	   		// controls for modal dialog
@@ -27,11 +26,33 @@ angular.module('angelhack')
 			        }
 			      }
 			    });
-
 			};
 		})
-	   	.controller('reportModalController', function($scope, $uibModalInstance) {
+	   	.controller('reportModalController', function($scope, $uibModalInstance, $http) {
+
+	   		var dummyData = {
+	   			"type": 4,
+	   			"description": "Stolen laptop",
+	   			"coordinates": [23.4, -23.4]
+	   		};
+
 	   		$scope.ok = function () {
+	   			console.log("click ok");
+	   			$http({
+	   				method: "POST",
+	   				url: "https://gangel.herokuapp.com/api/reports",
+	   				data: dummyData
+
+	   			}).then(function successCallback(response) {
+	   				console.log("success", response);
+				    // this callback will be called asynchronously
+				    // when the response is available
+				  }, function errorCallback(response) {
+				  	console.log("error", response);
+				    // called asynchronously if an error occurs
+				    // or server returns response with an error status.
+				});
+
 			    $uibModalInstance.close();
 			};
 
