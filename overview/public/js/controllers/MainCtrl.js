@@ -3,7 +3,7 @@
 angular.module('angelhack')
 	   .controller('MainController', function($rootScope, $scope, geolocationService, $http) {
 	   		var map,
-	   			data,
+	   			fetchedData,
 	   			dummyData = [
 	   				{
 	   					"createdAt": "2016-04-17T01:28:53.127Z",
@@ -37,7 +37,7 @@ angular.module('angelhack')
    				method: "GET",
    				url: "/api/reports"
    			}).then(function successCallback(response) {
-   				data = response.data;
+   				fetchedData = response.data;
    				console.log("success", response);
 			  }, function errorCallback(response) {
 			  	console.log("error", response);
@@ -47,10 +47,6 @@ angular.module('angelhack')
 			$scope.$on("coordsRetrieved", function(event, data) {
 				$rootScope.latitude = data.latitude;
 				$rootScope.longitude = data.longitude;
-
-				console.log("lat", $rootScope.latitude);
-				console.log("long", $rootScope.longitude);
-
 
 				require(["esri/map", 
 						 "esri/symbols/SimpleMarkerSymbol", 
@@ -67,7 +63,7 @@ angular.module('angelhack')
 
 						  	map.on("load", function() {
 						  		// add points from lat/long returned from api
-							  	dummyData.forEach(function(data) {
+							  	fetchedData.forEach(function(data) {
 							  		var pt = new esri.geometry.Point(data.longitude, data.latitude, new esri.SpatialReference({ 'wkid': 4326 })); 
 							  		console.log(pt);
 							  		map.graphics.add(new esri.Graphic(  
