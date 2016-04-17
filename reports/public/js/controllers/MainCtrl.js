@@ -28,7 +28,7 @@ angular.module('angelhack')
 					map.on("pan-end", function() {
 					  	$rootScope.latitude = map.extent.getCenter().getLatitude();
 					  	$rootScope.longtiude = map.extent.getCenter().getLongitude();
-					  	//map.graphics.add(new esri.geometry.Point($rootScope.longitude, $rootScope.latitude));
+					  	console.log(map.extent.getCenter());
 					});
 				});
 			});
@@ -55,7 +55,9 @@ angular.module('angelhack')
 	   		var data = {
 	   			"type": 0,
 	   			"description": "no response",
-	   			"coordinates": [$rootScope.longitude, $rootScope.latitude]
+	   			"latitude": $rootScope.latitude,
+	   			"longtiude": $rootScope.longitude
+	   			//"coordinates": [$rootScope.longitude, $rootScope.latitude]
 	   		}
 
 	   		$scope.ok = function (submission) {
