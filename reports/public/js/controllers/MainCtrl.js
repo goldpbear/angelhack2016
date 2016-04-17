@@ -27,8 +27,7 @@ angular.module('angelhack')
 				  	// update lat and long when user recenters the map
 					map.on("pan-end", function() {
 					  	$rootScope.latitude = map.extent.getCenter().getLatitude();
-					  	$rootScope.longtiude = map.extent.getCenter().getLongitude();
-					  	console.log(map.extent.getCenter());
+					  	$rootScope.longitude = map.extent.getCenter().getLongitude();
 					});
 				});
 			});
