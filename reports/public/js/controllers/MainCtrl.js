@@ -30,24 +30,31 @@ angular.module('angelhack')
 			};
 		})
 	   	.controller('reportModalController', function($scope, $uibModalInstance, $http, geolocationService) {
-	   		var temp = geolocationService.getCoords();
-	   		console.log(temp);
+	   		$scope.submission = {};
 
-	   		$scope.ok = function () {
-	   			console.log(dummyData);
+	   		var coords = geolocationService.getCoords();
+	   		console.log(coords);
+
+	   		var data = {
+	   			"type": undefined,
+	   			"description": undefined,
+	   			"coordinates": [coords.latitude, coords.longitude]
+	   		}
+
+	   		$scope.ok = function (submission) {
+	   			data.type = parseInt(submission.type);
+	   			data.description = submission.description;
+
+	   			console.log(data);
 	   			$http({
 	   				method: "POST",
-	   				url: "https://gangel.herokuapp.com/api/reports",
-	   				data: dummyData
+	   				url: "/api/reports",
+	   				data: data
 
 	   			}).then(function successCallback(response) {
 	   				console.log("success", response);
-				    // this callback will be called asynchronously
-				    // when the response is available
 				  }, function errorCallback(response) {
 				  	console.log("error", response);
-				    // called asynchronously if an error occurs
-				    // or server returns response with an error status.
 				});
 
 			    $uibModalInstance.close();

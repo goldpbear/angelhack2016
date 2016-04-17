@@ -1,24 +1,25 @@
 <div class="modal-body">
   <div class="container-fluid">
     <div class="row">
-      <form role="form-group">
+      <form role="form-group" name="crime-report-form">
         <fieldset>
           <legend class="modal-header">Create Crime Report</legend>
-          <label for="user-report"></label>
-          <input type="text" class="form-control" id="usr-input"><br>
-          <select class="form-control" id="crime-type">
+          Description of crime:
+          <textarea class="form-control" id="usr-input" ng-model="submission.description"></textarea>
+          <select class="form-control" id="crime-type" ng-model="submission.type">
             <option>select crime type</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+            <option value="2">Assault</option>
+            <option value="3">Robbery</option>
+            <option value="4">Vandalism</option>
           </select><br>
         </fieldset>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit" ng-click="ok(submission)">Report Crime</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
       </form>
     </div>
   </div>
 
 </div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">Report Crime</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-</div>
+
