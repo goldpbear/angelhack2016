@@ -1,20 +1,28 @@
 // public/js/controllers/MainCtrl.js
 
 angular.module('angelhack')
-	   .controller('MainController', function($scope, $uibModal, geolocationService) {
+	   .controller('MainController', function($rootScope, $scope, $uibModal, geolocationService) {
 	   		geolocationService.setCoords();
 
 		   	var map;
-			require(["esri/map"], function(Map, Point) {
-			  map = new Map("mapDiv", {
-			    center: [-56.049, 38.485],
-			    zoom: 5,
-			    basemap: "streets"
-			  });
-			});
 
 			$scope.$on("coordsRetrieved", function(event, data) {
-				map.centerAndZoom(new esri.geometry.Point(data.longitude, data.latitude), 14);
+				$rootScope.latitude = data.latitude;
+				$rootScope.longitude = data.longitude;
+
+				require(["esri/map"], function(Map) {
+				  	map = new Map("mapDiv", {
+					    center: [$rootScope.longitude, $rootScope.latitude],
+					    zoom: 14,
+					    basemap: "streets"
+					});
+
+				  	// update lat and long when user recenters the map
+					map.on("pan-end", function() {
+					  	$rootScope.latitude = map.extent.getCenter().getLatitude();
+					  	$rootScope.longtiude = map.extent.getCenter().getLongitude();
+					});
+				});
 			});
 
 	   		$scope.reportCrimeMsg = "Report a crime";
@@ -33,16 +41,13 @@ angular.module('angelhack')
 			    });
 			};
 		})
-	   	.controller('reportModalController', function($scope, $uibModalInstance, $http, geolocationService) {
+	   	.controller('reportModalController', function($rootScope, $scope, $uibModalInstance, $http, geolocationService) {
 	   		$scope.submission = {};
 
-	   		var coords = geolocationService.getCoords();
-	   		console.log(coords);
-
 	   		var data = {
-	   			"type": undefined,
-	   			"description": undefined,
-	   			"coordinates": [coords.latitude, coords.longitude]
+	   			"type": 0,
+	   			"description": "no response",
+	   			"coordinates": [$rootScope.longitude, $rootScope.latitude]
 	   		}
 
 	   		$scope.ok = function (submission) {
