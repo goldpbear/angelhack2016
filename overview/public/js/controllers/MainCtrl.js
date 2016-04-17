@@ -71,8 +71,18 @@ angular.module('angelhack')
 							  		map.graphics.add(new esri.Graphic(  
 							            esri.geometry.geographicToWebMercator(pt),
 							            new esri.symbol.SimpleMarkerSymbol(),
-							            { "description": data.description } 
-							          ));
+							            { "description": data.description,
+							              "createdAt": data.createdAt } 
+							        ));
+							  	});
+
+							  	map.graphics.on("mouse-over", function(evt) {
+							  		var graphicAttributes = evt.graphic.attributes;
+							  		var content = "<b>Description of this crime: </b><i>" + graphicAttributes.description + "</i><br>" +
+							  					  "<b>Time of crime: </b><i>" + new Date(graphicAttributes.createdAt) + "</i>";
+							  		map.infoWindow.setTitle("Crime report");
+  									map.infoWindow.setContent(content);
+  									map.infoWindow.show(evt.screenPoint,map.getInfoWindowAnchor(evt.screenPoint));
 
 							  	});
 						  	});
@@ -80,6 +90,6 @@ angular.module('angelhack')
 							$scope.showMap = true;
 							$scope.$apply();
 
-				});
+						});
 			});
 		});
