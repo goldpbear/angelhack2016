@@ -1,2 +1,10 @@
-<div id="mapDiv"></div>
-<button id="reportCrimeBtn" class="btn btn-lg btn-primary" ng-click="open()">{{ reportCrimeMsg }}</button>
+<div ng-hide="showMap" id="loading-icon">
+	<img src="img/loading.svg" width="40"/>
+</div>
+
+<div id="mapContainer" ng-show="showMap">
+	<img id="marker" src="img/marker.svg" width="40" />
+	<div id="mapDiv"></div>
+</div>
+
+<button id="reportCrimeBtn" class="btn btn-lg btn-primary" ng-show="showMap" ng-click="open()">{{ reportCrimeMsg }}</button>

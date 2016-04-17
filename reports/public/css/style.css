@@ -29,6 +29,12 @@ input{
   border-width: thin;
 }
 
+#marker {
+	position: absolute;
+	z-index: 1;
+	left: 45%;
+	top: 30%;
+}
 
 #submit{
   margin-top: 1rem;
@@ -54,4 +60,13 @@ input{
 
 #report-button p{
   padding-top: .4rem;
+}
+
+#reportCrimeBtn {
+	margin-top: 20px;
+	width: 100%;
+}
+
+#loading-icon img {
+	margin-top: 150px;
 }
