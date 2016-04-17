@@ -1,1 +1,7 @@
-<div>{{ tagline }}</div>
+<div ng-hide="showMap" id="loading-icon">
+	<img src="img/loading.svg" width="40"/>
+</div>
+
+<div id="mapContainer" ng-show="showMap">
+	<div id="mapDiv"></div>
+</div>
