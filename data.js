@@ -3,12 +3,17 @@ var Sequelize = require('sequelize');
 module.exports = function Data(options) {
 
   var inSync = false;
+  var db;
 
-  var db = new Sequelize(options.database, options.username, options.password, {
-    host: options.host,
-    port: options.port,
-    dialect: options.dialect
-  });
+  if (options.url) {
+    db = new Sequelize(url);
+  } else {
+    db = new Sequelize(options.database, options.username, options.password, {
+      host: options.host,
+      port: options.port,
+      dialect: options.dialect
+    });
+  }
 
   var User = db.define('user', {
     id:     { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
